@@ -1,0 +1,11 @@
+{
+  "name": "astrid-portfolio-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio website for Astrid Wulandari Rahardjo.",
+  "scripts": {
+    "serve": "npx serve .",
+    "check": "node scripts/check-site.js"
+  },
+  "devDependencies": {}
+}
