@@ -18,10 +18,13 @@ if (missing.length > 0) {
 
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const checks = [
-  ["has main landmark", /<main id="main">/.test(html)],
-  ["has primary navigation label", /aria-label="Primary navigation"/.test(html)],
+  ["has main landmark", /<main id="main-content">/.test(html)],
+  ["has primary navigation label", /aria-label="Primary"/.test(html)],
   ["has skip link", /class="skip-link"/.test(html)],
-  ["has hero image alt text", /alt="Workspace with climate policy charts/.test(html)],
+  ["uses resume-style brand structure", /class="brand-name"/.test(html)],
+  ["uses resume-style metric cards", /class="metric-grid"/.test(html)],
+  ["uses mobile nav toggle", /data-nav-toggle/.test(html)],
+  ["keeps climate workspace visual alt text", /alt="Workspace with climate policy charts/.test(html)],
   ["omits Korean mobile phone numbers", !/\b01\d[- ]?\d{3,4}[- ]?\d{4}\b/.test(html)],
   ["omits detailed street/unit address", !/\b\d{3,4}\s+\d{3,4}\b/.test(html)],
 ];
