@@ -6,6 +6,7 @@ const requiredFiles = [
   "index.html",
   "styles.css",
   "script.js",
+  "assets/favicon.svg",
   "assets/climate-finance-workspace.png",
   "vercel.json",
 ];
@@ -22,6 +23,7 @@ const checks = [
   ["has primary navigation label", /aria-label="Primary"/.test(html)],
   ["has skip link", /class="skip-link"/.test(html)],
   ["uses resume-style brand structure", /class="brand-name"/.test(html)],
+  ["has favicon", /rel="icon" href="assets\/favicon\.svg"/.test(html)],
   ["uses resume-style metric cards", /class="metric-grid"/.test(html)],
   ["uses mobile nav toggle", /data-nav-toggle/.test(html)],
   ["keeps climate workspace visual alt text", /alt="Workspace with climate policy charts/.test(html)],
