@@ -25,19 +25,23 @@ const css = fs.readFileSync(path.join(root, "styles.css"), "utf8");
 const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
 
 const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0;
+const portfolioMarkup = html.match(/<section class="portfolio[\s\S]*?<\/section>/)?.[0] ?? "";
 
 const checks = [
   ["has exactly one main landmark", countMatches(html, /<main\b/g) === 1],
   ["has a labeled primary navigation", /<nav[^>]+aria-label="Primary navigation"/.test(html)],
   ["has a keyboard skip link", /class="skip-link"[^>]+href="#main-content"/.test(html)],
   ["has an accessible mobile navigation toggle", /aria-expanded="false"[^>]+aria-controls="primary-navigation"/.test(html)],
-  ["has work, services, about, and contact sections", ["work", "services", "about", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["has work and contact sections", ["work", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["removes verbose lower-page sections", !/How I show up|id="services"|id="about"|class="approach"/.test(html)],
+  ["uses three image-led portfolio figures", countMatches(portfolioMarkup, /class="portfolio-item"/g) === 3],
+  ["keeps portfolio copy to practical captions", countMatches(portfolioMarkup, /<p\b/g) === 0 && countMatches(portfolioMarkup, /<figcaption>/g) === 3],
+  ["removes decorative lower-page artwork", !/community-pattern|about-sun|about-weave|contact-pattern/.test(html)],
   ["has native image dimensions", countMatches(html, /<img[^>]+width="\d+"[^>]+height="\d+"/g) >= 4],
   ["lazy-loads below-fold images", countMatches(html, /loading="lazy"/g) >= 3],
   ["uses local optimized portfolio images", ["astrid-hero-portrait.webp", "astrid-on-camera.webp", "astrid-voice-studio.webp"].every((asset) => html.includes(asset))],
   ["has social sharing metadata", /property="og:image"/.test(html) && /name="twitter:card"/.test(html)],
   ["has Person structured data", /"@type": "Person"/.test(html)],
-  ["has polite copy feedback", /role="status" aria-live="polite"/.test(html)],
   ["supports Escape to close mobile navigation", /event\.key === "Escape"/.test(script)],
   ["supports reduced motion", /prefers-reduced-motion: reduce/.test(css)],
   ["uses visible focus treatment", /:focus-visible/.test(css)],

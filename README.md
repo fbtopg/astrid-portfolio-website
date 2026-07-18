@@ -4,11 +4,11 @@ A modern editorial portfolio for Astrid Rahardjo, an Indonesian on-camera talent
 
 ## Experience
 
-- Art-directed hero and selected-work gallery
+- Art-directed hero and a compact, image-led selected-work gallery
 - YouTube, commercial, modeling, voice, and social supporter positioning
 - Warm minimalist identity with restrained Indonesian woven geometry
-- Responsive mobile navigation and booking-first contact flow
-- Accessible semantics, focus treatment, skip navigation, live feedback, and reduced-motion support
+- Responsive mobile navigation and a minimal booking contact
+- Accessible semantics, image descriptions, focus treatment, skip navigation, and reduced-motion support
 - SEO, social sharing metadata, and Person structured data
 
 ## Local Preview

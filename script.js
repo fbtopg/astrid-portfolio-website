@@ -6,9 +6,6 @@ const navPanel = document.querySelector("[data-nav-panel]");
 const navToggleLabel = navToggle?.querySelector(".sr-only");
 const navLinks = document.querySelectorAll(".nav-menu a");
 const year = document.querySelector("[data-year]");
-const copyButton = document.querySelector("[data-copy-email]");
-const copyLabel = document.querySelector("[data-copy-label]");
-const copyStatus = document.querySelector("[data-copy-status]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 if (year) {
@@ -103,43 +100,3 @@ if ("IntersectionObserver" in window && sections.length > 0) {
 
   sections.forEach((section) => sectionObserver.observe(section));
 }
-
-const fallbackCopy = (value) => {
-  const textArea = document.createElement("textarea");
-  textArea.value = value;
-  textArea.setAttribute("readonly", "");
-  textArea.style.position = "fixed";
-  textArea.style.opacity = "0";
-  document.body.appendChild(textArea);
-  textArea.select();
-  const copied = document.execCommand("copy");
-  textArea.remove();
-  return copied;
-};
-
-copyButton?.addEventListener("click", async () => {
-  const email = copyButton.dataset.email;
-  if (!email) return;
-
-  let copied = false;
-
-  try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(email);
-      copied = true;
-    } else {
-      copied = fallbackCopy(email);
-    }
-  } catch {
-    copied = fallbackCopy(email);
-  }
-
-  const message = copied ? "Email copied" : "Could not copy — use the email link above";
-  if (copyLabel) copyLabel.textContent = message;
-  if (copyStatus) copyStatus.textContent = message;
-
-  window.setTimeout(() => {
-    if (copyLabel) copyLabel.textContent = "Copy email";
-    if (copyStatus) copyStatus.textContent = "";
-  }, 2600);
-});
