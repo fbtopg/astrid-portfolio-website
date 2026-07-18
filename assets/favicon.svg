@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Astrid Rahardjo">
-  <rect width="64" height="64" rx="12" fill="#4FD1C5"/>
-  <path d="M0 0h64v64H0z" fill="url(#g)" opacity=".9"/>
-  <text x="32" y="39" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" font-weight="700" fill="#171923">AR</text>
-  <defs>
-    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#4FD1C5"/>
-      <stop offset="1" stop-color="#319795"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Astrid Rahardjo monogram</title>
+  <rect width="64" height="64" rx="14" fill="#f8f4ec"/>
+  <path d="M32 9 55 32 32 55 9 32Z" fill="#a74b34"/>
+  <path d="m32 17 15 15-15 15-15-15Z" fill="none" stroke="#fffdf8" stroke-width="1.5"/>
+  <path d="M32 17v30M17 32h30" stroke="#fffdf8" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="4" fill="#58766f" stroke="#fffdf8" stroke-width="1.5"/>
 </svg>

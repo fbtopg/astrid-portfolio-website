@@ -7,7 +7,10 @@ const requiredFiles = [
   "styles.css",
   "script.js",
   "assets/favicon.svg",
-  "assets/climate-finance-workspace.png",
+  "assets/astrid-hero-portrait.webp",
+  "assets/astrid-on-camera.webp",
+  "assets/astrid-voice-studio.webp",
+  "scripts/serve.mjs",
   "vercel.json",
 ];
 
@@ -18,23 +21,39 @@ if (missing.length > 0) {
 }
 
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const css = fs.readFileSync(path.join(root, "styles.css"), "utf8");
+const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
+
+const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0;
+
 const checks = [
-  ["has main landmark", /<main id="main-content">/.test(html)],
-  ["has primary navigation label", /aria-label="Primary"/.test(html)],
-  ["has skip link", /class="skip-link"/.test(html)],
-  ["uses resume-style brand structure", /class="brand-name"/.test(html)],
-  ["has favicon", /rel="icon" href="assets\/favicon\.svg"/.test(html)],
-  ["uses resume-style metric cards", /class="metric-grid"/.test(html)],
-  ["uses mobile nav toggle", /data-nav-toggle/.test(html)],
-  ["keeps climate workspace visual alt text", /alt="Workspace with climate policy charts/.test(html)],
+  ["has exactly one main landmark", countMatches(html, /<main\b/g) === 1],
+  ["has a labeled primary navigation", /<nav[^>]+aria-label="Primary navigation"/.test(html)],
+  ["has a keyboard skip link", /class="skip-link"[^>]+href="#main-content"/.test(html)],
+  ["has an accessible mobile navigation toggle", /aria-expanded="false"[^>]+aria-controls="primary-navigation"/.test(html)],
+  ["has work, services, about, and contact sections", ["work", "services", "about", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["has native image dimensions", countMatches(html, /<img[^>]+width="\d+"[^>]+height="\d+"/g) >= 4],
+  ["lazy-loads below-fold images", countMatches(html, /loading="lazy"/g) >= 3],
+  ["uses local optimized portfolio images", ["astrid-hero-portrait.webp", "astrid-on-camera.webp", "astrid-voice-studio.webp"].every((asset) => html.includes(asset))],
+  ["has social sharing metadata", /property="og:image"/.test(html) && /name="twitter:card"/.test(html)],
+  ["has Person structured data", /"@type": "Person"/.test(html)],
+  ["has polite copy feedback", /role="status" aria-live="polite"/.test(html)],
+  ["supports Escape to close mobile navigation", /event\.key === "Escape"/.test(script)],
+  ["supports reduced motion", /prefers-reduced-motion: reduce/.test(css)],
+  ["uses visible focus treatment", /:focus-visible/.test(css)],
+  ["keeps recommended touch target sizing", /min-height: 48px/.test(css)],
+  ["does not remove focus outlines", !/outline:\s*none/.test(css)],
+  ["contains no empty placeholder links", !/href="#"/.test(html)],
+  ["removes old climate-finance positioning", !/climate finance|environmental policy/i.test(html)],
   ["omits Korean mobile phone numbers", !/\b01\d[- ]?\d{3,4}[- ]?\d{4}\b/.test(html)],
-  ["omits detailed street/unit address", !/\b\d{3,4}\s+\d{3,4}\b/.test(html)],
+  ["omits detailed street or unit address", !/\b\d{3,4}\s+\d{3,4}\b/.test(html)],
 ];
 
 const failed = checks.filter(([, passed]) => !passed).map(([name]) => name);
+
 if (failed.length > 0) {
   console.error(`Site checks failed: ${failed.join(", ")}`);
   process.exit(1);
 }
 
-console.log("Static site checks passed.");
+console.log(`Static site checks passed (${checks.length} checks).`);
