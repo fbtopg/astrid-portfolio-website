@@ -620,7 +620,7 @@ ul {
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 0.78fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 0.9fr);
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
 }
 
@@ -663,8 +663,8 @@ ul {
   object-position: center 34%;
 }
 
-.portfolio-media-model img {
-  object-position: 52% 34%;
+.portfolio-media-teuida img {
+  object-position: center 22%;
 }
 
 .portfolio-item figcaption {
