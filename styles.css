@@ -628,7 +628,17 @@ ul {
   min-width: 0;
 }
 
+.portfolio-link {
+  display: block;
+}
+
+.portfolio-link:focus-visible {
+  outline-color: var(--clay);
+  outline-offset: 6px;
+}
+
 .portfolio-media {
+  position: relative;
   height: clamp(430px, 47vw, 650px);
   overflow: hidden;
   background: var(--paper-deep);
@@ -650,7 +660,7 @@ ul {
 }
 
 .portfolio-media-voice img {
-  object-position: 58% center;
+  object-position: center 34%;
 }
 
 .portfolio-media-model img {
@@ -668,6 +678,42 @@ ul {
 .portfolio-item figcaption span {
   font-size: 0.82rem;
   font-weight: 600;
+}
+
+.portfolio-item-linked figcaption > span:first-child {
+  transition: color 200ms ease;
+}
+
+.portfolio-item-linked:hover figcaption > span:first-child {
+  color: var(--clay-dark);
+}
+
+.portfolio-project-tag {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  border: 1px solid rgba(255, 253, 248, 0.28);
+  border-radius: 999px;
+  background: rgba(36, 29, 25, 0.88);
+  color: var(--ivory);
+  padding: 0.5rem 0.8rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.portfolio-external {
+  display: inline-block;
+  margin-left: 0.25rem;
+  transition: transform 200ms var(--ease-out);
+}
+
+.portfolio-item-linked:hover .portfolio-external {
+  transform: translate(2px, -2px);
 }
 
 .portfolio-item figcaption small {
