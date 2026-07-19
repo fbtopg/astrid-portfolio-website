@@ -12,6 +12,8 @@ const requiredFiles = [
   "assets/astrid-voice-studio.webp",
   "assets/juvelook-indonesia-reel.webp",
   "assets/teuida-app-model.jpg",
+  "assets/teuida-greetings-practice.jpg",
+  "assets/teuida-greetings-overview.jpg",
   "scripts/serve.mjs",
   "vercel.json",
 ];
@@ -25,6 +27,7 @@ if (missing.length > 0) {
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const css = fs.readFileSync(path.join(root, "styles.css"), "utf8");
 const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
+const server = fs.readFileSync(path.join(root, "scripts/serve.mjs"), "utf8");
 
 const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0;
 const portfolioMarkup = html.match(/<section class="portfolio[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -47,8 +50,10 @@ const checks = [
   ["features Juvelook Indonesia voice dubbing in selected work", /href="https:\/\/www\.instagram\.com\/reel\/DO0rRiBD0Sn\/"[^>]+target="_blank" rel="noopener noreferrer"/.test(portfolioMarkup) && /Juvelook Indonesia/.test(portfolioMarkup) && /Bahasa Indonesia voice dubbing · Marketing reel/.test(portfolioMarkup)],
   ["uses the optimized Juvelook campaign reel cover", /assets\/juvelook-indonesia-reel\.webp/.test(portfolioMarkup)],
   ["labels the Juvelook external link for assistive technology", /opens on Instagram in a new tab/.test(portfolioMarkup)],
-  ["features Astrid's TEUIDA app modeling in selected work", /href="https:\/\/apps\.apple\.com\/id\/app\/teuida-learn-languages\/id1457532562"[^>]+target="_blank" rel="noopener noreferrer"/.test(portfolioMarkup) && /<span>TEUIDA<\/span>/.test(portfolioMarkup) && /Episode 1 · Greetings &amp; Introduction/.test(portfolioMarkup) && /Level 3 · TEUIDA Games/.test(portfolioMarkup)],
-  ["uses Astrid's supplied TEUIDA app screen", /assets\/teuida-app-model\.jpg/.test(portfolioMarkup)],
+  ["features Astrid's TEUIDA app modeling in selected work", /id="teuida"/.test(portfolioMarkup) && /href="https:\/\/apps\.apple\.com\/id\/app\/teuida-learn-languages\/id1457532562"[^>]+target="_blank" rel="noopener noreferrer"/.test(portfolioMarkup) && /<span>TEUIDA<\/span>/.test(portfolioMarkup) && /Episode 1 · Greetings &amp; Introduction/.test(portfolioMarkup) && /Level 3 · TEUIDA Games/.test(portfolioMarkup)],
+  ["uses all three supplied TEUIDA photo thumbnails", ["teuida-greetings-practice.jpg", "teuida-app-model.jpg", "teuida-greetings-overview.jpg"].every((asset) => portfolioMarkup.includes(`assets/${asset}`)) && countMatches(portfolioMarkup, /class="teuida-thumbnail(?:\s[^\"]*)?"/g) === 3],
+  ["keeps the decorative TEUIDA thumbnail collage out of the link name", /class="teuida-thumbnail-grid" aria-hidden="true"/.test(portfolioMarkup) && countMatches(portfolioMarkup, /class="teuida-thumbnail[^\"]*"[\s\S]*?<img[^>]+alt=""/g) === 3],
+  ["serves supplied JPEG thumbnails with the correct media type", /"\.jpg": "image\/jpeg"/.test(server) && /"\.jpeg": "image\/jpeg"/.test(server)],
   ["labels the TEUIDA external link for assistive technology", /opens on the App Store in a new tab/.test(portfolioMarkup)],
   ["presents Astrid as Indonesian talent for World Friends", /Representing <em>Indonesia<\/em> on World Friends/.test(worldFriendsMarkup) && /on-camera talent representing Indonesia/.test(worldFriendsMarkup)],
   ["links all three supplied World Friends videos", worldFriendsVideoIds.every((id) => countMatches(worldFriendsMarkup, new RegExp(id, "g")) === 2)],

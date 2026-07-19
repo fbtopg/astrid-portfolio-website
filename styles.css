@@ -663,8 +663,57 @@ ul {
   object-position: center 34%;
 }
 
-.portfolio-media-teuida img {
-  object-position: center 22%;
+.portfolio-media-teuida {
+  background: var(--espresso);
+}
+
+.teuida-thumbnail-grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  background: var(--ivory);
+}
+
+.teuida-thumbnail {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+
+.teuida-thumbnail-primary {
+  grid-row: 1 / -1;
+}
+
+.teuida-thumbnail-primary img {
+  object-position: 68% center;
+}
+
+.teuida-thumbnail-games img,
+.teuida-thumbnail-overview img {
+  object-position: center top;
+}
+
+.teuida-thumbnail-label {
+  position: absolute;
+  z-index: 2;
+  top: 0.65rem;
+  left: 0.65rem;
+  border: 1px solid rgba(255, 253, 248, 0.28);
+  border-radius: 999px;
+  background: rgba(36, 29, 25, 0.82);
+  color: var(--ivory);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .portfolio-item figcaption {
