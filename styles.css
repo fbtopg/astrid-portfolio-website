@@ -655,12 +655,108 @@ ul {
   transform: scale(1.015);
 }
 
-.portfolio-media-camera img {
-  object-position: 58% center;
-}
-
 .portfolio-media-voice img {
   object-position: center 34%;
+}
+
+.portfolio-media-supporters {
+  background: var(--espresso);
+}
+
+.sns-work-thumbnail {
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  background: var(--ivory);
+}
+
+.sns-work-shot,
+.sns-work-tour-story {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sns-work-shot-rural {
+  grid-row: 1 / -1;
+}
+
+.sns-work-shot img {
+  object-position: center;
+}
+
+.sns-work-shot-rural img {
+  object-position: 56% center;
+}
+
+.sns-work-shot span,
+.sns-work-tour-story > span,
+.sns-work-tour-story small {
+  position: absolute;
+  z-index: 2;
+  left: 0.7rem;
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.sns-work-shot span {
+  bottom: 0.7rem;
+  border: 1px solid rgba(255, 253, 248, 0.32);
+  border-radius: 999px;
+  background: rgba(36, 29, 25, 0.82);
+  color: var(--ivory);
+  padding: 0.36rem 0.52rem;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.sns-work-tour-story {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 248, 0.08), transparent 55%),
+    var(--clay-dark);
+  color: var(--ivory);
+  padding: clamp(1rem, 2vw, 1.65rem);
+}
+
+.sns-work-tour-story::after {
+  position: absolute;
+  top: 50%;
+  right: -22%;
+  width: 72%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  border-radius: 50%;
+  content: "";
+}
+
+.sns-work-tour-story > span {
+  top: 0.75rem;
+  color: var(--sand);
+}
+
+.sns-work-tour-story strong {
+  position: relative;
+  z-index: 1;
+  font-family: var(--serif);
+  font-size: clamp(1.65rem, 3.1vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.8;
+}
+
+.sns-work-tour-story small {
+  bottom: 0.75rem;
+  color: var(--sand);
 }
 
 .portfolio-media-teuida {
@@ -1571,8 +1667,8 @@ ul {
     aspect-ratio: 4 / 5;
   }
 
-  .portfolio-media-camera,
-  .portfolio-item:first-child .portfolio-media-camera {
+  .portfolio-media-supporters,
+  .portfolio-item:first-child .portfolio-media-supporters {
     aspect-ratio: 4 / 3;
   }
 

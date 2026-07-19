@@ -53,6 +53,8 @@ const checks = [
   ["has native image dimensions", countMatches(html, /<img[^>]+width="\d+"[^>]+height="\d+"/g) >= 4],
   ["lazy-loads below-fold images", countMatches(html, /loading="lazy"/g) >= 3],
   ["uses optimized local editorial images", ["astrid-hero-portrait.webp", "astrid-on-camera.webp"].every((asset) => html.includes(asset))],
+  ["gives SNS supporter programs a dedicated selected-work thumbnail", /href="#sns-supporters"/.test(portfolioMarkup) && /class="portfolio-media portfolio-media-supporters"/.test(portfolioMarkup) && /class="sns-work-thumbnail" aria-hidden="true"/.test(portfolioMarkup) && ["sns-ttobagi-iksan.jpg", "sns-oh-my-gyeonggi-dongtan.jpg"].every((asset) => portfolioMarkup.includes(`assets/${asset}`)) && /class="sns-work-tour-story"/.test(portfolioMarkup)],
+  ["keeps the decorative SNS thumbnail collage out of the link name", countMatches(portfolioMarkup, /class="sns-work-shot(?:\s[^\"]*)?"[\s\S]*?<img[^>]+alt=""/g) === 2],
   ["features Juvelook Indonesia voice dubbing in selected work", /href="https:\/\/www\.instagram\.com\/reel\/DO0rRiBD0Sn\/"[^>]+target="_blank" rel="noopener noreferrer"/.test(portfolioMarkup) && /Juvelook Indonesia/.test(portfolioMarkup) && /Bahasa Indonesia voice dubbing · Marketing reel/.test(portfolioMarkup)],
   ["uses the optimized Juvelook campaign reel cover", /assets\/juvelook-indonesia-reel\.webp/.test(portfolioMarkup)],
   ["labels the Juvelook external link for assistive technology", /opens on Instagram in a new tab/.test(portfolioMarkup)],

@@ -7,7 +7,7 @@ A modern editorial portfolio for Astrid Rahardjo, an Indonesian on-camera talent
 - Art-directed hero and a compact, image-led selected-work gallery
 - Linked Juvelook Indonesia marketing reel featuring Astrid’s Bahasa Indonesia voice dubbing
 - Linked TEUIDA app feature with a supplied three-image thumbnail collage, crediting Astrid’s modeling in Episode 1 and Level 3
-- Dedicated SNS Supporter Programs section covering Tour Story (2025), Ttobagi rural tourism (2022–2023), and Oh! My Gyeonggi (2022), with linked campaign samples
+- Dedicated SNS Supporter Programs selected-work thumbnail and section covering Tour Story (2025), Ttobagi rural tourism (2022–2023), and Oh! My Gyeonggi (2022), with linked campaign samples
 - Dedicated World Friends feature with three linked YouTube appearances representing Indonesia
 - YouTube, commercial, modeling, voice, and social supporter positioning
 - Warm minimalist identity with restrained Indonesian woven geometry
