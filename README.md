@@ -9,6 +9,7 @@ A modern editorial portfolio for Astrid Rahardjo, an Indonesian on-camera talent
 - Linked TEUIDA app feature with a supplied three-image thumbnail collage, crediting Astrid’s modeling in Episode 1 and Level 3
 - Dedicated SNS Supporter Programs selected-work thumbnail and section covering Tour Story (2025), Ttobagi rural tourism (2022–2023), and Oh! My Gyeonggi (2022), with linked campaign samples
 - Dedicated World Friends selected-work thumbnail and feature with three linked YouTube appearances representing Indonesia
+- Timestamp-linked K Explorer street-interview feature with three stills from Astrid’s correspondent segment beginning at 15:07
 - YouTube, commercial, modeling, voice, and social supporter positioning
 - Warm minimalist identity with restrained Indonesian woven geometry
 - Responsive mobile navigation and a minimal booking contact
@@ -35,7 +36,7 @@ The check validates required assets, page structure, accessibility hooks, metada
 
 ## Image Note
 
-The supporting Astrid image assets are AI-generated art-direction placeholders created with the built-in image generation workflow. They intentionally establish a consistent tone and layout while additional personal photography is unavailable. The landing-page portrait, Juvelook card, and TEUIDA project cards use supplied portfolio, campaign, and in-app media.
+The supporting Astrid image assets are AI-generated art-direction placeholders created with the built-in image generation workflow. They intentionally establish a consistent tone and layout while additional personal photography is unavailable. The landing-page portrait, Juvelook card, and TEUIDA project cards use supplied portfolio, campaign, and in-app media. The K Explorer card uses stills from Astrid’s published street-interview segment.
 
 - `assets/astrid-rahardjo-hero-white-top.jpg` — supplied landing-page portrait of Astrid, with a distinct URL to prevent the former hero from remaining in browser caches
 - `assets/astrid-on-camera.*` — hosted YouTube and branded-content direction
@@ -46,5 +47,6 @@ The supporting Astrid image assets are AI-generated art-direction placeholders c
 - `assets/teuida-greetings-overview.jpg` — supplied Episode 1 Greetings and Introductions overview screen
 - `assets/sns-ttobagi-*.jpg` — campaign previews from Astrid’s Wanju and Iksan rural tourism posts
 - `assets/sns-oh-my-gyeonggi-*.jpg` — campaign previews from Astrid’s Osan and Dongtan tourism posts
+- `assets/kexplorer-street-interview-*.webp` — three optimized frames from Astrid’s K Explorer interview segment, captured after its 15:07 start
 
 The generation prompts emphasized a modern Indonesian woman, natural editorial texture, warm ivory and terracotta tones, subtle woven/rattan geometry, understated class, and no logos, text, or cultural costume clichés.
