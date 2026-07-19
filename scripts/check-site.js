@@ -26,13 +26,15 @@ const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
 
 const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0;
 const portfolioMarkup = html.match(/<section class="portfolio[\s\S]*?<\/section>/)?.[0] ?? "";
+const worldFriendsMarkup = html.match(/<section class="world-friends[\s\S]*?<\/section>/)?.[0] ?? "";
+const worldFriendsVideoIds = ["lx6Cmv2QUO0", "pcRmtfuUnww", "sK8qkDCfdUg"];
 
 const checks = [
   ["has exactly one main landmark", countMatches(html, /<main\b/g) === 1],
   ["has a labeled primary navigation", /<nav[^>]+aria-label="Primary navigation"/.test(html)],
   ["has a keyboard skip link", /class="skip-link"[^>]+href="#main-content"/.test(html)],
   ["has an accessible mobile navigation toggle", /aria-expanded="false"[^>]+aria-controls="primary-navigation"/.test(html)],
-  ["has work and contact sections", ["work", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["has work, World Friends, and contact sections", ["work", "world-friends", "contact"].every((id) => html.includes(`id="${id}"`))],
   ["removes verbose lower-page sections", !/How I show up|id="services"|id="about"|class="approach"/.test(html)],
   ["uses three image-led portfolio figures", countMatches(portfolioMarkup, /class="portfolio-item"/g) === 3],
   ["keeps portfolio copy to practical captions", countMatches(portfolioMarkup, /<p\b/g) === 0 && countMatches(portfolioMarkup, /<figcaption>/g) === 3],
@@ -40,12 +42,17 @@ const checks = [
   ["has native image dimensions", countMatches(html, /<img[^>]+width="\d+"[^>]+height="\d+"/g) >= 4],
   ["lazy-loads below-fold images", countMatches(html, /loading="lazy"/g) >= 3],
   ["uses local optimized portfolio images", ["astrid-hero-portrait.webp", "astrid-on-camera.webp", "astrid-voice-studio.webp"].every((asset) => html.includes(asset))],
+  ["presents Astrid as Indonesian talent for World Friends", /Representing <em>Indonesia<\/em> on World Friends/.test(worldFriendsMarkup) && /on-camera talent representing Indonesia/.test(worldFriendsMarkup)],
+  ["links all three supplied World Friends videos", worldFriendsVideoIds.every((id) => countMatches(worldFriendsMarkup, new RegExp(id, "g")) === 2)],
+  ["uses three official World Friends thumbnails", countMatches(worldFriendsMarkup, /https:\/\/i\.ytimg\.com\/vi\/[^/]+\/maxresdefault\.jpg/g) === 3],
+  ["uses semantic linked video cards", countMatches(worldFriendsMarkup, /<article class="video-card"/g) === 3 && countMatches(worldFriendsMarkup, /class="video-card-link"/g) === 3],
+  ["opens video links safely", countMatches(worldFriendsMarkup, /target="_blank" rel="noopener noreferrer"/g) === 3],
   ["has social sharing metadata", /property="og:image"/.test(html) && /name="twitter:card"/.test(html)],
   ["has Person structured data", /"@type": "Person"/.test(html)],
   ["supports Escape to close mobile navigation", /event\.key === "Escape"/.test(script)],
   ["supports reduced motion", /prefers-reduced-motion: reduce/.test(css)],
   ["uses visible focus treatment", /:focus-visible/.test(css)],
-  ["keeps recommended touch target sizing", /min-height: 48px/.test(css)],
+  ["keeps recommended touch target sizing", /min-height: 48px/.test(css) && /min-height: 44px/.test(css)],
   ["does not remove focus outlines", !/outline:\s*none/.test(css)],
   ["contains no empty placeholder links", !/href="#"/.test(html)],
   ["removes old climate-finance positioning", !/climate finance|environmental policy/i.test(html)],

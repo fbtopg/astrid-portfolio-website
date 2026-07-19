@@ -5,6 +5,7 @@ A modern editorial portfolio for Astrid Rahardjo, an Indonesian on-camera talent
 ## Experience
 
 - Art-directed hero and a compact, image-led selected-work gallery
+- Dedicated World Friends feature with three linked YouTube appearances representing Indonesia
 - YouTube, commercial, modeling, voice, and social supporter positioning
 - Warm minimalist identity with restrained Indonesian woven geometry
 - Responsive mobile navigation and a minimal booking contact
