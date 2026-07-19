@@ -37,7 +37,7 @@ The check validates required assets, page structure, accessibility hooks, metada
 
 The supporting Astrid image assets are AI-generated art-direction placeholders created with the built-in image generation workflow. They intentionally establish a consistent tone and layout while additional personal photography is unavailable. The landing-page portrait, Juvelook card, and TEUIDA project cards use supplied portfolio, campaign, and in-app media.
 
-- `assets/astrid-hero-portrait.*` — supplied landing-page portrait of Astrid
+- `assets/astrid-rahardjo-hero-white-top.jpg` — supplied landing-page portrait of Astrid, with a distinct URL to prevent the former hero from remaining in browser caches
 - `assets/astrid-on-camera.*` — hosted YouTube and branded-content direction
 - `assets/astrid-voice-studio.*` — professional voice-over direction
 - `assets/juvelook-indonesia-reel.webp` — official Juvelook Indonesia reel cover, optimized for the selected-work card
