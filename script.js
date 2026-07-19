@@ -50,7 +50,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-window.matchMedia("(min-width: 761px)").addEventListener("change", (event) => {
+window.matchMedia("(min-width: 901px)").addEventListener("change", (event) => {
   if (event.matches) setNavigation(false);
 });
 

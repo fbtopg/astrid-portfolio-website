@@ -14,6 +14,10 @@ const requiredFiles = [
   "assets/teuida-app-model.jpg",
   "assets/teuida-greetings-practice.jpg",
   "assets/teuida-greetings-overview.jpg",
+  "assets/sns-ttobagi-wanju.jpg",
+  "assets/sns-ttobagi-iksan.jpg",
+  "assets/sns-oh-my-gyeonggi-osan.jpg",
+  "assets/sns-oh-my-gyeonggi-dongtan.jpg",
   "scripts/serve.mjs",
   "vercel.json",
 ];
@@ -31,6 +35,7 @@ const server = fs.readFileSync(path.join(root, "scripts/serve.mjs"), "utf8");
 
 const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0;
 const portfolioMarkup = html.match(/<section class="portfolio[\s\S]*?<\/section>/)?.[0] ?? "";
+const supporterProgramsMarkup = html.match(/<section class="supporter-programs[\s\S]*?<\/section>/)?.[0] ?? "";
 const worldFriendsMarkup = html.match(/<section class="world-friends[\s\S]*?<\/section>/)?.[0] ?? "";
 const worldFriendsVideoIds = ["lx6Cmv2QUO0", "pcRmtfuUnww", "sK8qkDCfdUg"];
 
@@ -39,7 +44,8 @@ const checks = [
   ["has a labeled primary navigation", /<nav[^>]+aria-label="Primary navigation"/.test(html)],
   ["has a keyboard skip link", /class="skip-link"[^>]+href="#main-content"/.test(html)],
   ["has an accessible mobile navigation toggle", /aria-expanded="false"[^>]+aria-controls="primary-navigation"/.test(html)],
-  ["has work, World Friends, and contact sections", ["work", "world-friends", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["has work, SNS supporter, World Friends, and contact sections", ["work", "sns-supporters", "world-friends", "contact"].every((id) => html.includes(`id="${id}"`))],
+  ["links the primary navigation to SNS supporter programs", /class="nav-menu"[\s\S]*?href="#sns-supporters"/.test(html)],
   ["removes verbose lower-page sections", !/How I show up|id="services"|id="about"|class="approach"/.test(html)],
   ["uses three image-led portfolio figures", countMatches(portfolioMarkup, /class="portfolio-item(?:\s[^"]*)?"/g) === 3],
   ["keeps portfolio copy to practical captions", countMatches(portfolioMarkup, /<p\b/g) === 0 && countMatches(portfolioMarkup, /<figcaption>/g) === 3],
@@ -55,6 +61,14 @@ const checks = [
   ["keeps the decorative TEUIDA thumbnail collage out of the link name", /class="teuida-thumbnail-grid" aria-hidden="true"/.test(portfolioMarkup) && countMatches(portfolioMarkup, /class="teuida-thumbnail[^\"]*"[\s\S]*?<img[^>]+alt=""/g) === 3],
   ["serves supplied JPEG thumbnails with the correct media type", /"\.jpg": "image\/jpeg"/.test(server) && /"\.jpeg": "image\/jpeg"/.test(server)],
   ["labels the TEUIDA external link for assistive technology", /opens on the App Store in a new tab/.test(portfolioMarkup)],
+  ["features exactly three SNS supporter programs", countMatches(supporterProgramsMarkup, /<article class="supporter-program"/g) === 3],
+  ["features the 2025 Tour Story supporter program", /Tour Story Travel Agency SNS Supporter/.test(supporterProgramsMarkup) && /href="https:\/\/ktourstory\.com\/"[^>]+target="_blank" rel="noopener noreferrer"/.test(supporterProgramsMarkup)],
+  ["features the 2022 and 2023 Ttobagi rural tourism program", /Global Rural Tourism Supporter \/ Ttobagi Family Farm/.test(supporterProgramsMarkup) && /Ministry of Agriculture, Food and Rural Affairs \(MAFRA\)/.test(supporterProgramsMarkup) && /Korea Rural Community Corporation/.test(supporterProgramsMarkup)],
+  ["links both supplied Ttobagi campaign posts", ["CkGbVzFprCa", "Cj7-0D4JtT7"].every((id) => supporterProgramsMarkup.includes(id))],
+  ["features the 2022 Oh My Gyeonggi foreign supporter program", /Gyeonggi Tourism Foreign Supporters — Oh! My Gyeonggi/.test(supporterProgramsMarkup) && /international audiences/.test(supporterProgramsMarkup) && /potential visitors overseas/.test(supporterProgramsMarkup)],
+  ["links both supplied Oh My Gyeonggi campaign posts", ["CleECemJv3z", "CldU8xcuj8c"].every((id) => supporterProgramsMarkup.includes(id))],
+  ["uses four local supporter campaign thumbnails", ["sns-ttobagi-wanju.jpg", "sns-ttobagi-iksan.jpg", "sns-oh-my-gyeonggi-osan.jpg", "sns-oh-my-gyeonggi-dongtan.jpg"].every((asset) => supporterProgramsMarkup.includes(`assets/${asset}`))],
+  ["opens all five SNS program links safely", countMatches(supporterProgramsMarkup, /target="_blank" rel="noopener noreferrer"/g) === 5],
   ["presents Astrid as Indonesian talent for World Friends", /Representing <em>Indonesia<\/em> on World Friends/.test(worldFriendsMarkup) && /on-camera talent representing Indonesia/.test(worldFriendsMarkup)],
   ["links all three supplied World Friends videos", worldFriendsVideoIds.every((id) => countMatches(worldFriendsMarkup, new RegExp(id, "g")) === 2)],
   ["uses three official World Friends thumbnails", countMatches(worldFriendsMarkup, /https:\/\/i\.ytimg\.com\/vi\/[^/]+\/maxresdefault\.jpg/g) === 3],
@@ -63,6 +77,7 @@ const checks = [
   ["has social sharing metadata", /property="og:image"/.test(html) && /name="twitter:card"/.test(html)],
   ["has Person structured data", /"@type": "Person"/.test(html)],
   ["supports Escape to close mobile navigation", /event\.key === "Escape"/.test(script)],
+  ["keeps the responsive navigation breakpoint aligned", /window\.matchMedia\("\(min-width: 901px\)"\)/.test(script) && /@media \(max-width: 900px\)/.test(css)],
   ["supports reduced motion", /prefers-reduced-motion: reduce/.test(css)],
   ["uses visible focus treatment", /:focus-visible/.test(css)],
   ["keeps recommended touch target sizing", /min-height: 48px/.test(css) && /min-height: 44px/.test(css)],
