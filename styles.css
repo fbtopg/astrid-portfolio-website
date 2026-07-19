@@ -620,7 +620,7 @@ ul {
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 0.9fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
 }
 
@@ -657,6 +657,58 @@ ul {
 
 .portfolio-media-voice img {
   object-position: center 34%;
+}
+
+.portfolio-media-world-friends {
+  background: var(--espresso);
+}
+
+.world-friends-work-thumbnail {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: 3px;
+  background: var(--ivory);
+}
+
+.world-friends-work-shot {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.world-friends-work-shot-primary {
+  grid-column: 1 / -1;
+}
+
+.world-friends-work-shot img {
+  object-position: center;
+}
+
+.world-friends-work-shot-primary img {
+  object-position: center 38%;
+}
+
+.world-friends-work-shot span {
+  position: absolute;
+  z-index: 2;
+  top: 0.7rem;
+  left: 0.7rem;
+  display: grid;
+  width: 1.85rem;
+  height: 1.85rem;
+  place-items: center;
+  border: 1px solid rgba(255, 253, 248, 0.34);
+  background: rgba(36, 29, 25, 0.84);
+  color: var(--ivory);
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .portfolio-media-supporters {
@@ -1562,17 +1614,9 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
-  .portfolio-item:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .portfolio-item:first-child .portfolio-media {
-    height: auto;
-    aspect-ratio: 3 / 2;
-  }
-
   .portfolio-media {
-    height: min(80vw, 620px);
+    height: auto;
+    aspect-ratio: 4 / 5;
   }
 
   .supporter-heading {
@@ -1657,18 +1701,13 @@ ul {
     grid-template-columns: 1fr;
   }
 
-  .portfolio-item:first-child {
-    grid-column: auto;
-  }
-
-  .portfolio-media,
-  .portfolio-item:first-child .portfolio-media {
+  .portfolio-media {
     height: auto;
     aspect-ratio: 4 / 5;
   }
 
-  .portfolio-media-supporters,
-  .portfolio-item:first-child .portfolio-media-supporters {
+  .portfolio-media-world-friends,
+  .portfolio-media-supporters {
     aspect-ratio: 4 / 3;
   }
 
